@@ -17,7 +17,5 @@ app.use((err, _req, res, _next) => {
 });
 mongoose_1.default
     .connect("mongodb+srv://admin:iziuOrCmnGavldZ0@htetlinmaungcluster-vtpxr.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
-    .then(() => {
-    app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
-})
+    .then(() => app.listen(PORT, () => console.log(`Server listening on port ${PORT}`)))
     .catch((err) => console.log(err.message));

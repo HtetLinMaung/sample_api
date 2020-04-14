@@ -55,3 +55,8 @@ exports.updateTodo = (req, res) => {
         .then((result) => res.json({ message: "Updated Successfully", data: result }))
         .catch((err) => res.status(400).json({ message: err.message }));
 };
+exports.completeAllTodos = (req, res) => {
+    Todo_1.default.updateMany({}, { $set: { completed: req.body.completed } })
+        .then((result) => res.json({ message: "Updated Successfully", data: result }))
+        .catch((err) => res.status(400).json({ message: err.message }));
+};
