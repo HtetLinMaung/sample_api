@@ -24,7 +24,7 @@ export const fetchTodos: RequestHandler = (req, res) => {
       search[key] = value;
     }
   }
-  
+
   Todo.find(search)
     .then((results) => res.json(results))
     .catch((err: Error) => res.status(400).json({ message: err.message }));
@@ -55,6 +55,14 @@ export const updateTodo: RequestHandler = (req: any, res) => {
   }
   (todo as ITodo)
     .save()
+    .then((result) =>
+      res.json({ message: "Updated Successfully", data: result })
+    )
+    .catch((err: Error) => res.status(400).json({ message: err.message }));
+};
+
+export const completeAllTodos: RequestHandler = (req, res) => {
+  Todo.updateMany({}, { $set: { completed: req.body.completed } })
     .then((result) =>
       res.json({ message: "Updated Successfully", data: result })
     )
